@@ -275,6 +275,40 @@
       }
     ]
   },
+  "TP2_nvfp4_n0": {
+    "meta": {},
+    "pc_enabled": false,
+    "version": "0.4.0",
+    "rows": [
+      {
+        "context": 0,
+        "prompt": 512,
+        "gen": 256,
+        "prefill_tps": 3468.81,
+        "decode_tps": 31.07,
+        "peak_tps": 32.0,
+        "ttft_ms": 232.1
+      },
+      {
+        "context": 4096,
+        "prompt": 512,
+        "gen": 256,
+        "prefill_tps": NaN,
+        "decode_tps": NaN,
+        "peak_tps": NaN,
+        "ttft_ms": NaN
+      },
+      {
+        "context": 32768,
+        "prompt": 512,
+        "gen": 256,
+        "prefill_tps": NaN,
+        "decode_tps": NaN,
+        "peak_tps": NaN,
+        "ttft_ms": NaN
+      }
+    ]
+  },
   "E_dflash_n15": {
     "meta": {
       "kv": "auto",

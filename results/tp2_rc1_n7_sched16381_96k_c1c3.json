@@ -1,0 +1,110 @@
+{
+  "label": "tp2_rc1_n7_sched16381_96k_c1c3",
+  "started_at": "2026-07-28T17:03:09.603343+00:00",
+  "base_url": "http://192.168.178.79:8080",
+  "model": "spark",
+  "target_prompt_tokens": 98304,
+  "output_tokens": 128,
+  "rounds": 1,
+  "batches": [
+    {
+      "concurrency": 1,
+      "round": 1,
+      "generated_prompt_tokens": [
+        98284
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 67.35161197601701,
+          "e2e_s": 67.79781683499459,
+          "usage": {
+            "prompt_tokens": 98324,
+            "total_tokens": 98332,
+            "completion_tokens": 8
+          },
+          "completion_chars": 31
+        }
+      ],
+      "summary": {
+        "successful": 1,
+        "median_ttft_s": 67.35161197601701,
+        "median_e2e_s": 67.79781683499459
+      }
+    },
+    {
+      "concurrency": 3,
+      "round": 1,
+      "generated_prompt_tokens": [
+        98272,
+        98272,
+        98272
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 215.81022404599935,
+          "e2e_s": 216.51387157000136,
+          "usage": {
+            "prompt_tokens": 98312,
+            "total_tokens": 98322,
+            "completion_tokens": 10
+          },
+          "completion_chars": 48
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 146.4339366190252,
+          "e2e_s": 220.06896971800597,
+          "usage": {
+            "prompt_tokens": 98312,
+            "total_tokens": 98399,
+            "completion_tokens": 87
+          },
+          "completion_chars": 306
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 75.71997858802206,
+          "e2e_s": 107.36537660402246,
+          "usage": {
+            "prompt_tokens": 98312,
+            "total_tokens": 98320,
+            "completion_tokens": 8
+          },
+          "completion_chars": 31
+        }
+      ],
+      "summary": {
+        "successful": 3,
+        "median_ttft_s": 146.4339366190252,
+        "median_e2e_s": 216.51387157000136
+      }
+    }
+  ],
+  "metrics_before": {
+    "vllm:spec_decode_num_draft_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "967848.0",
+    "vllm:spec_decode_num_accepted_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "230059.0",
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "metrics_after": {
+    "vllm:spec_decode_num_draft_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "968135.0",
+    "vllm:spec_decode_num_accepted_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "230127.0",
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "finished_at": "2026-07-28T17:08:10.166950+00:00"
+}

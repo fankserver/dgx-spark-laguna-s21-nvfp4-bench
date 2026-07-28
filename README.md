@@ -66,6 +66,16 @@ bash scripts/laguna_bench_driver.sh                 # redeploys per config
 python3 scripts/aggregate_and_plot.py results .
 ```
 
+## TP=2 / RC1 concurrent serving follow-up
+
+The historic sweep above is TP=1 and single-stream. A separate, non-destructive TP=2 RC1 probe
+on 2026-07-28 tested unique 98k-token cold prefills at c=1 and c=3 with the live v0.26.0 service.
+See [`tp2-rc1-concurrent-2026-07-28.md`](tp2-rc1-concurrent-2026-07-28.md) and its raw JSON.
+The preliminary long-context recommendation is **no DFlash + `--max-num-scheduled-tokens 4096`**:
+removing DFlash raised target-KV capacity from 3.11M (2.96× at 1M) to **4.52M (4.31×)** at the
+same explicit cache allocation, while matched c=3 TTFT was statistically neutral in the one-run
+probe. This does not overturn the TP=1 short-context result that n=3 is the productive DFlash depth.
+
 ## Caveats
 
 Single-stream (concurrency=1); `runs=2`. Spec acceptance is workload-dependent — benchy's

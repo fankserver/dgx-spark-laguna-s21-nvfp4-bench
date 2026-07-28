@@ -1,0 +1,106 @@
+{
+  "label": "tp2_rc1_n0_sched4096_96k_c1c3",
+  "started_at": "2026-07-28T17:31:34.117541+00:00",
+  "base_url": "http://192.168.178.79:8080",
+  "model": "spark",
+  "target_prompt_tokens": 98304,
+  "output_tokens": 128,
+  "rounds": 1,
+  "batches": [
+    {
+      "concurrency": 1,
+      "round": 1,
+      "generated_prompt_tokens": [
+        98282
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 65.9677248649823,
+          "e2e_s": 66.22885774998576,
+          "usage": {
+            "prompt_tokens": 98322,
+            "total_tokens": 98330,
+            "completion_tokens": 8
+          },
+          "completion_chars": 35
+        }
+      ],
+      "summary": {
+        "successful": 1,
+        "median_ttft_s": 65.9677248649823,
+        "median_e2e_s": 66.22885774998576
+      }
+    },
+    {
+      "concurrency": 3,
+      "round": 1,
+      "generated_prompt_tokens": [
+        98272,
+        98272,
+        98272
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 132.44590566700208,
+          "e2e_s": 201.19528387402534,
+          "usage": {
+            "prompt_tokens": 98312,
+            "total_tokens": 98378,
+            "completion_tokens": 66
+          },
+          "completion_chars": 291
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 199.21594058600022,
+          "e2e_s": 203.3599794670008,
+          "usage": {
+            "prompt_tokens": 98312,
+            "total_tokens": 98405,
+            "completion_tokens": 93
+          },
+          "completion_chars": 495
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 66.03791966399876,
+          "e2e_s": 127.83698679698864,
+          "usage": {
+            "prompt_tokens": 98312,
+            "total_tokens": 98336,
+            "completion_tokens": 24
+          },
+          "completion_chars": 151
+        }
+      ],
+      "summary": {
+        "successful": 3,
+        "median_ttft_s": 132.44590566700208,
+        "median_e2e_s": 201.19528387402534
+      }
+    }
+  ],
+  "metrics_before": {
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "metrics_after": {
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "finished_at": "2026-07-28T17:36:13.408360+00:00"
+}

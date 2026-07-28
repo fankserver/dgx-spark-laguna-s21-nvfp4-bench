@@ -76,3 +76,6 @@ if/when the underlying NVRM instability is resolved.
   Throughput is unaffected; for tool-eval quality some users prefer `enable_thinking:false`.
 - TP=1 uses the FlashInfer attention backend without incident (the GLM FLASHINFER hard-hang
   was TP rank-1-specific; single-node has no rank-1 worker).
+- **TP=2 RC1 concurrent follow-up:** see [`tp2-rc1-concurrent-2026-07-28.md`](tp2-rc1-concurrent-2026-07-28.md).
+  This is deliberately separate from the TP=1 verdict: for the 1M/multi-session lane, removing
+  DFlash increased target-KV capacity from 2.96× to 4.31× at the same cache cap and restored UMA reserve.

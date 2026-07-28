@@ -24,24 +24,34 @@ ORDER = list(CONFIG_META.keys())
 
 def load(results_dir):
     data = {}
+    TP2_LABELS = {"tp2_rc1_n7_sched16381_96k_c1c3", "tp2_rc1_n3_sched4096_96k_c1c3",
+                  "tp2_rc1_n0_sched4096_96k_c1c3", "warmup_tp2_rc1_n0_sched4096_8k_c1c3",
+                  "warmup_tp2_rc1_n3_sched4096_8k_c1c3", "smoke_n7_current_2k_c1"}
+    REJECT_SUFFIXES = (".stdout", ".pc", "_warmup_", "_smoke_", "tp2_rc1_")
     for f in glob.glob(os.path.join(results_dir, "*.json")):
         label = os.path.splitext(os.path.basename(f))[0]
         if label.endswith(".stdout") or label.endswith(".pc") or label == "prefix_probe":
             continue  # .pc = prefix-caching pass, handled separately
+        if label in TP2_LABELS or any(s in label for s in REJECT_SUFFIXES):
+            continue  # TP=2 concurrent results use a different format
         try:
             d = json.load(open(f))
         except Exception as e:
             print(f"skip {f}: {e}"); continue
         rows = []
+        def safe_mean(d):
+            if d is None: return float("nan")
+            v = d.get("mean")
+            return round(v, 2) if v is not None else float("nan")
         for b in d.get("benchmarks", []):
             rows.append(dict(
                 context=b.get("context_size"),
                 prompt=b.get("prompt_size"),
                 gen=b.get("response_size"),
-                prefill_tps=round(b.get("pp_throughput", {}).get("mean", float("nan")), 2),
-                decode_tps=round(b.get("tg_throughput", {}).get("mean", float("nan")), 2),
-                peak_tps=round(b.get("peak_throughput", {}).get("mean", float("nan")), 2),
-                ttft_ms=round(b.get("e2e_ttft", {}).get("mean", float("nan")), 1),
+                prefill_tps=safe_mean(b.get("pp_throughput")),
+                decode_tps=safe_mean(b.get("tg_throughput")),
+                peak_tps=safe_mean(b.get("peak_throughput")),
+                ttft_ms=round((b.get("e2e_ttft") or {}).get("mean", float("nan")), 1),
             ))
         rows.sort(key=lambda r: (r["context"] if r["context"] is not None else 0))
         data[label] = dict(meta=CONFIG_META.get(label, {}), pc_enabled=d.get("prefix_caching_enabled"),
@@ -181,10 +191,10 @@ def main():
     prefix = read_prefix_probe(results_dir)
 
     # markdown
-    md = ["# GLM-4.7 355B AWQ on 2× DGX Spark (GB10) — performance sweep",
+    md = ["# Laguna-S-2.1-NVFP4 on 1× DGX Spark (GB10) — performance sweep",
           "",
           "Standard benchmark: **llama-benchy** (llama-bench-style). Model kept constant "
-          "(QuantTrio/GLM-4.7-AWQ W4A16, TP=2 over 200G fabric). Each config redeployed fresh; "
+          "(poolside/Laguna-S-2.1-NVFP4, TP=1). Each config redeployed fresh; "
           "context-depth sweep with pp=512, tg=256, runs=2, latency-mode=generation.",
           ""]
     v = next(iter(data.values())).get("version")

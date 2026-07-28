@@ -1,6 +1,6 @@
-# GLM-4.7 355B AWQ on 2× DGX Spark (GB10) — performance sweep
+# Laguna-S-2.1-NVFP4 on 1× DGX Spark (GB10) — performance sweep
 
-Standard benchmark: **llama-benchy** (llama-bench-style). Model kept constant (QuantTrio/GLM-4.7-AWQ W4A16, TP=2 over 200G fabric). Each config redeployed fresh; context-depth sweep with pp=512, tg=256, runs=2, latency-mode=generation.
+Standard benchmark: **llama-benchy** (llama-bench-style). Model kept constant (poolside/Laguna-S-2.1-NVFP4, TP=1). Each config redeployed fresh; context-depth sweep with pp=512, tg=256, runs=2, latency-mode=generation.
 
 _llama-benchy 0.4.0 · single-stream (concurrency=1)_
 

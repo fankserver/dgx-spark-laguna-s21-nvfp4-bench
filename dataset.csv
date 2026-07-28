@@ -97,3 +97,6 @@ F_nvfp4_n0_eager,auto,none (n=0),enforce-eager,262144,24576,2652.79,17.22,18.0,9
 F_nvfp4_n0_eager,auto,none (n=0),enforce-eager,262144,32768,2577.39,16.71,18.0,13030.4
 F_nvfp4_n0_eager,auto,none (n=0),enforce-eager,262144,49152,2405.49,16.45,17.0,20766.5
 F_nvfp4_n0_eager,auto,none (n=0),enforce-eager,262144,65536,2237.19,16.04,17.0,29641.3
+TP2_nvfp4_n0,,,,,0,3468.81,31.07,32.0,232.1
+TP2_nvfp4_n0,,,,,4096,nan,nan,nan,nan
+TP2_nvfp4_n0,,,,,32768,nan,nan,nan,nan

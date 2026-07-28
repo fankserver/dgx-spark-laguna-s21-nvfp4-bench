@@ -1,0 +1,110 @@
+{
+  "label": "warmup_tp2_rc1_n3_sched4096_8k_c1c3",
+  "started_at": "2026-07-28T17:17:26.596612+00:00",
+  "base_url": "http://192.168.178.79:8080",
+  "model": "spark",
+  "target_prompt_tokens": 8192,
+  "output_tokens": 32,
+  "rounds": 1,
+  "batches": [
+    {
+      "concurrency": 1,
+      "round": 1,
+      "generated_prompt_tokens": [
+        8163
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 4.247680681000929,
+          "e2e_s": 5.286268045019824,
+          "usage": {
+            "prompt_tokens": 8203,
+            "total_tokens": 8211,
+            "completion_tokens": 8
+          },
+          "completion_chars": 31
+        }
+      ],
+      "summary": {
+        "successful": 1,
+        "median_ttft_s": 4.247680681000929,
+        "median_e2e_s": 5.286268045019824
+      }
+    },
+    {
+      "concurrency": 3,
+      "round": 1,
+      "generated_prompt_tokens": [
+        8165,
+        8165,
+        8165
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 8.731184315023711,
+          "e2e_s": 12.240222972002812,
+          "usage": {
+            "prompt_tokens": 8205,
+            "total_tokens": 8212,
+            "completion_tokens": 7
+          },
+          "completion_chars": 26
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 2.4533243569894694,
+          "e2e_s": 8.73123867198592,
+          "usage": {
+            "prompt_tokens": 8205,
+            "total_tokens": 8214,
+            "completion_tokens": 9
+          },
+          "completion_chars": 40
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 6.265366496023489,
+          "e2e_s": 13.156539662013529,
+          "usage": {
+            "prompt_tokens": 8205,
+            "total_tokens": 8229,
+            "completion_tokens": 24
+          },
+          "completion_chars": 158
+        }
+      ],
+      "summary": {
+        "successful": 3,
+        "median_ttft_s": 6.265366496023489,
+        "median_e2e_s": 12.240222972002812
+      }
+    }
+  ],
+  "metrics_before": {
+    "vllm:spec_decode_num_draft_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:spec_decode_num_accepted_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "metrics_after": {
+    "vllm:spec_decode_num_draft_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "63.0",
+    "vllm:spec_decode_num_accepted_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "23.0",
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "finished_at": "2026-07-28T17:17:46.949122+00:00"
+}

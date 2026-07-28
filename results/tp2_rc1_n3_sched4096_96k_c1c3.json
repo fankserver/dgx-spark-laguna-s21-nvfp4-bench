@@ -1,0 +1,110 @@
+{
+  "label": "tp2_rc1_n3_sched4096_96k_c1c3",
+  "started_at": "2026-07-28T17:17:56.959721+00:00",
+  "base_url": "http://192.168.178.79:8080",
+  "model": "spark",
+  "target_prompt_tokens": 98304,
+  "output_tokens": 128,
+  "rounds": 1,
+  "batches": [
+    {
+      "concurrency": 1,
+      "round": 1,
+      "generated_prompt_tokens": [
+        98282
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 66.69282171802479,
+          "e2e_s": 70.38712034802302,
+          "usage": {
+            "prompt_tokens": 98322,
+            "total_tokens": 98385,
+            "completion_tokens": 63
+          },
+          "completion_chars": 324
+        }
+      ],
+      "summary": {
+        "successful": 1,
+        "median_ttft_s": 66.69282171802479,
+        "median_e2e_s": 70.38712034802302
+      }
+    },
+    {
+      "concurrency": 3,
+      "round": 1,
+      "generated_prompt_tokens": [
+        98292,
+        98292,
+        98292
+      ],
+      "requests": [
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 201.1940171160095,
+          "e2e_s": 208.69181603001198,
+          "usage": {
+            "prompt_tokens": 98332,
+            "total_tokens": 98446,
+            "completion_tokens": 114
+          },
+          "completion_chars": 516
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 134.95607439399464,
+          "e2e_s": 139.2416696799919,
+          "usage": {
+            "prompt_tokens": 98332,
+            "total_tokens": 98340,
+            "completion_tokens": 8
+          },
+          "completion_chars": 31
+        },
+        {
+          "http_status": 200,
+          "error": null,
+          "ttft_s": 67.8397324969992,
+          "e2e_s": 73.83106703299563,
+          "usage": {
+            "prompt_tokens": 98332,
+            "total_tokens": 98341,
+            "completion_tokens": 9
+          },
+          "completion_chars": 40
+        }
+      ],
+      "summary": {
+        "successful": 3,
+        "median_ttft_s": 134.95607439399464,
+        "median_e2e_s": 139.2416696799919
+      }
+    }
+  ],
+  "metrics_before": {
+    "vllm:spec_decode_num_draft_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "63.0",
+    "vllm:spec_decode_num_accepted_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "23.0",
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "metrics_after": {
+    "vllm:spec_decode_num_draft_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "333.0",
+    "vllm:spec_decode_num_accepted_tokens_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "123.0",
+    "vllm:num_requests_running{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"capacity\"}": "0.0",
+    "vllm:num_requests_waiting_by_reason{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\",reason=\"deferred\"}": "0.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0",
+    "vllm:num_preemptions_total{engine=\"0\",model_name=\"poolside/Laguna-S-2.1-NVFP4\"}": "0.0"
+  },
+  "finished_at": "2026-07-28T17:22:41.094647+00:00"
+}
