@@ -30,6 +30,11 @@ This is decisive independently of the latency-noise caveat. At the same 60.89 GB
 
 Removing DFlash supplies **45.7% more target-KV capacity** and materially restores GB10 UMA reserve. The older n=7 measurement was at the same 2.96× KV capacity and had only roughly 6–7 GiB available during interactive load.
 
+## Graphs
+
+![TTFT concurrent](graphs/tp2_ttft_concurrent.png)
+![E2E concurrent](graphs/tp2_e2e_concurrent.png)
+
 ## Current conclusion
 
 For the 1M/multi-session service, leave **no DFlash + 4096 scheduled tokens** active provisionally. It is at least TTFT-neutral in this matched probe, removes the drafter's large target-KV tax, and is safer on UMA. DFlash n=3 remains the likely winner for short, predictable coding completions; it needs a separate controlled decode benchmark (fixed completion length / deterministic sampling) before reintroducing it to this long-context lane.
