@@ -133,6 +133,14 @@ See `dataset.csv` / `dataset.json`. Per-config, per-context rows:
 | `F_nvfp4_n0_eager` | 49152 | 2405.49 | 16.45 | 17.0 | 20766.5 |
 | `F_nvfp4_n0_eager` | 65536 | 2237.19 | 16.04 | 17.0 | 29641.3 |
 
+## TP=2 concurrent 96k probe
+
+![TTFT concurrent](graphs/tp2_ttft_concurrent.png)
+
+![E2E concurrent](graphs/tp2_e2e_concurrent.png)
+
+See [tp2-rc1-concurrent-2026-07-28.md](tp2-rc1-concurrent-2026-07-28.md) for analysis.
+
 ## Graphs
 
 ![decode_vs_context.png](graphs/decode_vs_context.png)

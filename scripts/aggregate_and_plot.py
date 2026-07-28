@@ -6,6 +6,7 @@ Usage: aggregate_and_plot.py <results_dir> <out_dir>
   results_dir: contains <label>.json (llama-benchy) + optional prefix_probe.txt
 """
 import sys, os, json, csv, glob
+import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -165,6 +166,69 @@ def read_prefix_probe(results_dir):
             except Exception: return None
     return txt
 
+TP2_CONCURRENT_LABELS = {
+    "tp2_rc1_n7_sched16381_96k_c1c3": "DFlash n=7",
+    "tp2_rc1_n3_sched4096_96k_c1c3": "DFlash n=3",
+    "tp2_rc1_n0_sched4096_96k_c1c3": "no DFlash",
+}
+
+def load_tp2_concurrent(results_dir):
+    data = {}
+    for label, display in TP2_CONCURRENT_LABELS.items():
+        path = os.path.join(results_dir, f"{label}.json")
+        if not os.path.exists(path):
+            continue
+        d = json.load(open(path))
+        items = []
+        for b in d.get("batches", []):
+            for r in b.get("requests", []):
+                u = r.get("usage", {}) or {}
+                items.append(dict(
+                    concurrency=b["concurrency"],
+                    ttft_s=r["ttft_s"],
+                    e2e_s=r["e2e_s"],
+                    completion_tokens=u.get("completion_tokens", 0),
+                    error=r["error"],
+                ))
+        if items:
+            data[display] = items
+    return data
+
+def plot_tp2_concurrent_bars(data, gdir):
+    variants = [k for k in TP2_CONCURRENT_LABELS.values() if k in data]
+    if not variants:
+        return
+    concurrency_levels = sorted(set(x["concurrency"] for v in data.values() for x in v))
+    n_conc = len(concurrency_levels)
+    n_var = len(variants)
+    x = np.arange(n_conc)
+    width = 0.7 / n_var
+    for metric, ylabel, title, fn in [
+        ("ttft_s", "median TTFT (s)", "TP=2 concurrent 96k prefill — TTFT", "tp2_ttft_concurrent.png"),
+        ("e2e_s", "median E2E (s)", "TP=2 concurrent 96k prefill — E2E", "tp2_e2e_concurrent.png"),
+    ]:
+        plt.figure(figsize=(max(6, n_conc * 2.5), 5.5))
+        for j, var in enumerate(variants):
+            items = data[var]
+            vals = []
+            for c in concurrency_levels:
+                matched = [x[metric] for x in items if x["concurrency"] == c and x[metric] is not None]
+                vals.append(np.median(matched) if matched else 0)
+            pos = x + (j - (n_var - 1) / 2) * width
+            bars = plt.bar(pos, vals, width, label=var)
+            for p, v in zip(pos, vals):
+                if v:
+                    plt.text(p, v, f"{v:.1f}", ha="center", va="bottom", fontsize=7)
+        plt.xticks(x, [f"c={c}" for c in concurrency_levels], fontsize=10)
+        plt.ylabel(ylabel)
+        plt.title(title)
+        plt.legend(fontsize=9)
+        plt.grid(True, axis="y", alpha=0.3)
+        plt.tight_layout()
+        plt.savefig(os.path.join(gdir, fn), dpi=120)
+        plt.close()
+        print(f"wrote {fn}")
+
 def main():
     results_dir, out_dir = sys.argv[1], sys.argv[2]
     os.makedirs(out_dir, exist_ok=True)
@@ -237,6 +301,14 @@ def main():
         else:
             md.append("```\n" + str(prefix)[:1500] + "\n```")
         md.append("")
+    # ── TP=2 concurrent latency graphs ──────────────────────────────
+    tp2_data = load_tp2_concurrent(results_dir)
+    if tp2_data:
+        plot_tp2_concurrent_bars(tp2_data, gdir)
+        md.append("## TP=2 concurrent 96k probe\n")
+        md.append("![TTFT concurrent](graphs/tp2_ttft_concurrent.png)\n")
+        md.append("![E2E concurrent](graphs/tp2_e2e_concurrent.png)\n")
+        md.append("See [tp2-rc1-concurrent-2026-07-28.md](tp2-rc1-concurrent-2026-07-28.md) for analysis.\n")
     md.append("## Graphs\n")
     for g in ["decode_vs_context.png", "ttft_vs_context.png", "prefill_vs_context.png",
               "decode_grouped.png", "ttft_grouped.png"]:
